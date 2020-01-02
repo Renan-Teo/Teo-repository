@@ -1,0 +1,36 @@
+import gpiozero as gpio
+import time
+import _thread
+from gpiozero import LED
+from time import sleep
+
+led1 = LED(5)
+led2 = LED(26)
+
+
+
+vermpisca = int(input("quantas vezes o vermelho deve piscar? "))
+
+verdpisca = int(input("quantas vezes o verde deve piscar? "))
+
+def redled (thread1):
+    x = 0
+    while (x <= vermpisca):
+        led1.on()
+        sleep(0.09)
+        led1.off()
+        sleep(0.09)
+        x = x+1
+
+def greenled (thread2):
+    y = 0
+    while (y <= verdpisca):
+        led2.on()
+        sleep(0.09)    
+        led2.off()
+        sleep(0.09)
+        y = y+1
+        
+        
+_thread.start_new_thread(redled, ("piscandored",))
+_thread.start_new_thread(greenled, ("piscandogreen",))
